@@ -9,6 +9,11 @@ module.exports.profile = function (req, res) {
 }
 
 module.exports.signUp = function (req, res) {
+
+    if(req.isAuthenticated()){
+       return res.redirect('/user/profile') 
+    }
+
     return res.render('user_sign_up', {
         title: "Codeial | sign Up"
     })
@@ -19,9 +24,19 @@ module.exports.posts = function (req, res) {
     })
 }
 module.exports.signIn = function (req, res) {
+    
+    if(req.isAuthenticated()){
+        return res.redirect('/user/profile') 
+     }
+
     return res.render('user_sign_in', {
         title: "Codeial | sign In"
     })
+}
+module.exports.signOut = function (req, res) {
+    req.logout(function(){
+        return res.redirect('/')
+    });
 }
 module.exports.create = function (req, res) {
     if(req.body.password !== req.body.confirm_password){
@@ -31,7 +46,7 @@ module.exports.create = function (req, res) {
     User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
-            return User.create(req.body);
+            return User.create(req.body)
         } else {
             return Promise.reject("User already exists");
         }
@@ -63,6 +78,7 @@ module.exports.create = function (req, res) {
         // }
     // })
 }
-module.exports.create_sessions = function (req, res) {
+module.exports.createSession = function (req, res) {
     // todo
+    return res.redirect('/')
 }
