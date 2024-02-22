@@ -1,1 +1,0 @@
-<h1>User posts appear here</h1>

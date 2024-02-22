@@ -8,7 +8,6 @@ router.get('/profile', passport.checkAuthentication, userController.profile);
 router.get('/sign-up', userController.signUp);
 router.get('/sign-in', userController.signIn);
 router.get('/sign-out', userController.signOut);
-router.get('/posts', userController.posts);
 router.post('/create', userController.create);
 router.post('/create-sessions',passport.authenticate(
     'local',

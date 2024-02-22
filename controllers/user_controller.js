@@ -44,22 +44,21 @@ module.exports.create = function (req, res) {
         return res.redirect('back')
     }
     User.findOne({ email: req.body.email })
-    .then(user => {
-        if (!user) {
-            return User.create(req.body)
-        } else {
-            return Promise.reject("User already exists");
-        }
-    })
-    .then(createdUser => {
-        return res.redirect('/user/sign-in');
-    })
-    .catch(err => {
-        console.error("Error in signing up:", err);
-        return res.redirect('back');
-    });
+        .then(user => {
+            if (!user) {
+                User.create(req.body);
+                return res.redirect('/user/sign-in');
+            } else {
+                console.log("User alreasy Exists");
+                return res.redirect('/user/sign-in');
+            }
+        })
+        .catch(err => {
+            console.error("Error in finding user in sign up page :", err);
+            return
+        });
 
-    
+
 
     // if(req.body.password != req.body.confirmPassword){
     // }
@@ -67,15 +66,15 @@ module.exports.create = function (req, res) {
     // User.findOne({ email: req.body.email }, (err, user) => {
     //     if (err) { console.log("error in finding user in signing up"); return }
 
-        // if (!user) {
-        //     user.create(req.body, function (err, user) {
-        //         if (err) { console.log("error in creating user while signing up"); return }
+    // if (!user) {
+    //     user.create(req.body, function (err, user) {
+    //         if (err) { console.log("error in creating user while signing up"); return }
 
-        //         return res.redirect('user/sign-in')
-        //     })
-        // } else {
-        //     // return res.redirect('back')
-        // }
+    //         return res.redirect('user/sign-in')
+    //     })
+    // } else {
+    //     // return res.redirect('back')
+    // }
     // })
 }
 module.exports.createSession = function (req, res) {
