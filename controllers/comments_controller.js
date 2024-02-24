@@ -2,8 +2,10 @@ const Comment = require('../models/comments')
 const Post = require('../models/posts')
 
 module.exports.create = function(req, res) {
-    Post.findById(req.body.post)
-        .then(post => {
+    console.log("==============",req.body.post,"==============")
+    Post.findOne({_id : req.body.post.id})
+    .then(post => {
+            console.log("--------------------",post)
             if (!post) {
                 console.log('Post not found');
             }
@@ -54,3 +56,12 @@ module.exports.create = function(req, res) {
 //         console.log('Error while adding  post comment')
 //     })
 // }
+
+module.exports.destroy = function(req, res){
+    Comment.findById(req.params.id)
+    .then(comment => {
+        if(comment.user == req.user.id){
+            
+        }
+    })
+}

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const postSchema = mongoose.Schema({
     content: {
         type: String,
         required: true,
@@ -8,7 +8,6 @@ const postSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        unique: true
     },
     comment: [
         {

@@ -4,7 +4,7 @@
     <ul>
         <% if(locals.user){%>
             <li>
-                <a href="/user/profile"><%= user.name%></a>
+                <a href="/user/profile/<%= locals.user._id%>"><%= user.name%></a>
             </li>
             <li>
                 <a href="/user/Sign-out">Sign Out</a>
